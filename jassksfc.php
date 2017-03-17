@@ -2,7 +2,7 @@
 require_once("./twitteroauth/twitteroauth.php");
 ini_set( 'display_errors', 1 );
 
-$json_info = file_get_contents("./accounts/jasskjp.json");
+$json_info = file_get_contents("./accounts/jassksfc.json");
 $account_info = json_decode($json_info);
 $consumer_key = $account_info->consumer_key;
 $consumer_secret = $account_info->consumer_secret;
@@ -20,7 +20,7 @@ $now_hour = date("H");
 $now_minute = date("i");
 $now_day_z = date("z");
 
-$target = "@katariba";
+$target = "@SFC_Welcomer";
 
 //定期ポスト
 $text1 = "【前編】
@@ -32,28 +32,28 @@ $text4 = "【前編】
 JaSSKの前身である瀧本ゼミ生による、鈴木寛東大教授への対談前編です。「実は、政府は禁じていないのに、自治体の窓口や現場の長や担当者が政府のせいにしているケースが案外多い。」記事はこちらから！https://goo.gl/X9LDSj";
 $text5 = "【後編】
 JaSSKの前身の瀧本ゼミ生による、鈴木寛東大教授への対談後編です。「何かを動かす事はボタンのスイッチを押していく事だと思っているのですが、どのボタンをどういう風にどんな順番で押すのか理解している人は多くないです。」https://goo.gl/TsZuTk";
-if($now_hour == "13" && $now_minute == "30"){
+if($now_hour == "01" && $now_minute == "55"){
 echo $now_hour;
 echo $now_minute;
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$text1));
 echo $req;
 }
 
-if($now_hour == "14" && $now_minute == "03"){
+if($now_hour == "12" && $now_minute == "05"){
 //echo $now_hour;
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$text2));
 //echo $req;
 }
 
-if($now_hour == "17" && $now_minute == "30"){
+if($now_hour == "19" && $now_minute == "30"){
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$text3));
 }
 
-if($now_hour == "22" && $now_minute == "15"){
+if($now_hour == "20" && $now_minute == "15"){
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$text4));
 }
 
-if($now_hour == "22" && $now_minute == "45"){
+if($now_hour == "20" && $now_minute == "45"){
 $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$text5));
 }
 
@@ -68,7 +68,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
   $req = $to->OAuthRequest("https://api.twitter.com/1.1/followers/ids.json","GET",array("screen_name"=>$target));
   $to_follow_accounts = json_decode($req)->ids;
 
-  $fp = fopen("./log_files/followed_list_jassksfc.txt", "r");
+  $fp = fopen("./log_files/followed_list_jasskjp.txt", "r");
   $followed_accounts = array();
   while(!feof($fp)){
     $buffer = fgets($fp);
