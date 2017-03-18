@@ -42,7 +42,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
   $req = $to->OAuthRequest("https://api.twitter.com/1.1/followers/ids.json","GET",array("screen_name"=>$target));
   $to_follow_accounts = json_decode($req)->ids;
 
-  $fp = fopen("./log_files/followed_list_jassksfc.txt", "r");
+  $fp = fopen("./log_files/followed_list_jasskjp.txt", "r");
   $followed_accounts = array();
   while(!feof($fp)){
     $buffer = fgets($fp);
@@ -52,9 +52,8 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
 
   foreach ($to_follow_accounts as $key1 => $to_follow_ids) {
     $is_having_followed = False;
-    echo "$to_follow_ids\n";
-    foreach ($followed_accounts as $num => $followd_ids){
-      if ($followd_ids == $to_follow_ids || $to_follow_ids >= 100000000000000){
+    foreach ($followed_accounts as $num => $followed_ids){
+      if ($followed_ids == $to_follow_ids || $to_follow_ids >= 100000000000000){
         $is_having_followed = True;
         break;
       }
@@ -64,6 +63,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
       $fp = fopen("./log_files/followed_list_jasskjp.txt", "a");
       fputs($fp, "$to_follow_ids\n");
       fclose($fp);
+      echo "$to_follow_ids\n";
       break;
     }
   }
