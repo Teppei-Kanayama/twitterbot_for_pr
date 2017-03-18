@@ -20,7 +20,7 @@ $now_hour = date("H");
 $now_minute = date("i");
 $now_day_z = date("z");
 
-$target = "@SFC_Welcomer";
+$target = "@AIESECSFC";
 
 //定期ポスト
 $text1 = "【前編】
@@ -61,6 +61,7 @@ $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POS
 $freq = 10;
 $remain = rand(1, $freq - 1);
 
+echo "$now_minute\n";
 echo "$freq\n";
 echo "$remain\n"; ###
 
@@ -68,7 +69,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
   $req = $to->OAuthRequest("https://api.twitter.com/1.1/followers/ids.json","GET",array("screen_name"=>$target));
   $to_follow_accounts = json_decode($req)->ids;
 
-  $fp = fopen("./log_files/followed_list_jasskjp.txt", "r");
+  $fp = fopen("./log_files/followed_list_jassksfc.txt", "r");
   $followed_accounts = array();
   while(!feof($fp)){
     $buffer = fgets($fp);
@@ -87,7 +88,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
     }
     if ($is_having_followed == False){
       $req = $to->OAuthRequest("https://api.twitter.com/1.1/friendships/create.json","POST",array("user_id"=>$to_follow_ids, "follow"=>False));
-      $fp = fopen("./log_files/followed_list_jasskjp.txt", "a");
+      $fp = fopen("./log_files/followed_list_jassksfc.txt", "a");
       fputs($fp, "$to_follow_ids\n");
       fclose($fp);
       break;
