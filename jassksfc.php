@@ -2,14 +2,7 @@
 require_once("./twitteroauth/twitteroauth.php");
 require_once("./utility.php");
 ini_set( 'display_errors', 1 );
-/*
-$json_info = file_get_contents("./accounts/jassksfc.json");
-$account_info = json_decode($json_info);
-$consumer_key = $account_info->consumer_key;
-$consumer_secret = $account_info->consumer_secret;
-$access_token = $account_info->access_token;
-$access_token_secret = $account_info->access_token_secret;
-*/
+
 //アカウント情報取得
 list($consumer_key,$consumer_secret,$access_token,$access_token_secret) = read_account_info("./accounts/jassksfc.json");
 // OAuthオブジェクト生成
