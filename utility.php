@@ -1,5 +1,14 @@
 <?php
 
+function read_account_info($path_to_account_info){
+  $account_info = json_decode(file_get_contents($path_to_account_info));
+  $consumer_key = $account_info->consumer_key;
+  $consumer_secret = $account_info->consumer_secret;
+  $access_token = $account_info->access_token;
+  $access_token_secret = $account_info->access_token_secret;
+  return array($consumer_key,$consumer_secret,$access_token,$access_token_secret);
+}
+
 function auto_tweet($to, $path_to_tweet_contents, $now_hour, $now_minute){
   $tweets_info = json_decode(file_get_contents($path_to_tweet_contents));
   foreach($tweets_info as $tmp => $tweet_info){
