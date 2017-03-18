@@ -1,5 +1,6 @@
 ﻿<?php
 require_once("./twitteroauth/twitteroauth.php");
+require_once("./utility.php")
 ini_set( 'display_errors', 1 );
 
 $json_info = file_get_contents("./accounts/jassksfc.json");
@@ -11,9 +12,8 @@ $access_token_secret = $account_info->access_token_secret;
 // OAuthオブジェクト生成
 $to = new TwitterOAuth($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 
-$req_main = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/mentions_timeline.json", "GET", array());
-$result = json_decode($req_main);
-echo $req_main;
+#$req_main = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/mentions_timeline.json", "GET", array());
+#$result = json_decode($req_main);
 
 $now_day = date("d");
 $now_hour = date("H");
@@ -22,14 +22,23 @@ $now_day_z = date("z");
 
 $target = "@AIESECSFC";
 
+auto_tweet($to, "./tweets/tweets_jassksfc.json", $now_hour, $now_minute);
+auto_follow($to, $target, $now_hour, $now_minute, 10, 7, "./log_files/followed_list_jassksfc.txt");
+
+
 //定期ポスト
+/*
 $tweets_info = json_decode(file_get_contents("./tweets/tweets_jassksfc.json"));
 foreach($tweets_info as $tmp => $tweet_info){
   if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute){
     $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
   }
 }
+*/
 
+
+
+/*
 $freq = 10;
 $remain = rand(1, $freq - 1);
 
@@ -68,4 +77,5 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
   }
 
 }
+*/
 ?>
