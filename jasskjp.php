@@ -21,7 +21,7 @@ $now_hour = date("H");
 $now_minute = date("i");
 $now_day_z = date("z");
 
-$target = "@katariba";
+$target = "@Dotjp_global";
 
 //定期ポスト
 $tweets_info = json_decode(file_get_contents("./tweets/tweets_jasskjp.json"));
@@ -59,7 +59,7 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
       }
     }
     if ($is_having_followed == False){
-      $req = $to->OAuthRequest("https://api.twitter.com/1.1/friendships/create.json","POST",array("user_id"=>$to_follow_ids, "follow"=>False));
+      $req = $to->OAuthRequest("https://api.twitter.com/1.1/friendships/create.json","POST",array("user_id"=>$to_follow_ids));
       $fp = fopen("./log_files/followed_list_jasskjp.txt", "a");
       fputs($fp, "$to_follow_ids\n");
       fclose($fp);

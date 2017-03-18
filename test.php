@@ -1,6 +1,9 @@
 ﻿<?php
 require_once("./twitteroauth/twitteroauth.php");
+require_once("./test_required.php");
 ini_set( 'display_errors', 1 );
+
+foo("aaaaa");
 
 $json_info = file_get_contents("./accounts/test.json");
 $account_info = json_decode($json_info);

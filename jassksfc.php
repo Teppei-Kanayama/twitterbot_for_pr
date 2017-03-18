@@ -52,14 +52,14 @@ if($now_minute % $freq == $remain && $now_hour >= 7){
   foreach ($to_follow_accounts as $key1 => $to_follow_ids) {
     $is_having_followed = False;
     echo "$to_follow_ids\n";
-    foreach ($followed_accounts as $num => $followd_ids){
-      if ($followd_ids == $to_follow_ids || $to_follow_ids >= 100000000000000){
+    foreach ($followed_accounts as $num => $followed_ids){
+      if ($followed_ids == $to_follow_ids || $to_follow_ids >= 100000000000000){
         $is_having_followed = True;
         break;
       }
     }
     if ($is_having_followed == False){
-      $req = $to->OAuthRequest("https://api.twitter.com/1.1/friendships/create.json","POST",array("user_id"=>$to_follow_ids, "follow"=>False));
+      $req = $to->OAuthRequest("https://api.twitter.com/1.1/friendships/create.json","POST",array("user_id"=>$to_follow_ids));
       $fp = fopen("./log_files/followed_list_jassksfc.txt", "a");
       fputs($fp, "$to_follow_ids\n");
       fclose($fp);
