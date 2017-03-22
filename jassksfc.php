@@ -13,8 +13,9 @@ $now_hour = date("H");
 $now_minute = date("i");
 $now_day_z = date("z");
 
-$target = "@AIESECSFC";
+#$target = "@AIESECSFC";
+$path_to_target_list = "./target/keio_sogoseisaku.csv";
 
 auto_tweet($to, "./tweets/tweets_jassksfc.json", $now_hour, $now_minute);
-auto_follow($to, $target, $now_hour, $now_minute, 10, 7, "./log_files/followed_list_jassksfc.txt");
+#auto_follow2($to, $path_to_target_list, $now_hour, $now_minute, 10, 7, "./log_files/followed_list_jassksfc.txt");
 ?>
