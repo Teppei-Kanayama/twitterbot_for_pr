@@ -9,10 +9,13 @@ function read_account_info($path_to_account_info){
   return array($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 }
 
-function auto_tweet($to, $path_to_tweet_contents, $now_hour, $now_minute){
+function auto_tweet($to, $path_to_tweet_contents, $now_date, $now_hour, $now_minute){
   $tweets_info = json_decode(file_get_contents($path_to_tweet_contents));
+  var_dump($now_date);
+  var_dump($now_date % 2);
   foreach($tweets_info as $tmp => $tweet_info){
-    if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute){
+    var_dump($tweet_info->number);
+    if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date % 2 == $tweet_info->number){
       $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
     }
   }
