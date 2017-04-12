@@ -22,10 +22,26 @@ function auto_tweet($to, $path_to_tweet_contents, $now_hour, $now_minute, $now_d
     return 0;
   }
 
+  if(array_key_exists("is_once", $tweets_info)){
+    foreach($tweets_info as $tmp => $tweet_info){
+      var_dump($now_date);
+      if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date == $tweet_info->number){
+        $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
+      }
+    }
+  }
+
   #2日周期でツイート内容を切り替える場合
   foreach($tweets_info as $tmp => $tweet_info){
-    if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date % 2 == $tweet_info->number){
-      $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
+    if(array_key_exists("is_once", $tweet_info)){
+      var_dump($now_date);
+      if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date == $tweet_info->number){
+        $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
+      }
+    }else{
+      if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date % 2 == $tweet_info->number){
+        $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
+      }
     }
   }
   return 0;
