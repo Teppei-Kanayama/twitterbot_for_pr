@@ -13,6 +13,6 @@ $now_minute = date("i");
 $now_day_z = date("z");
 $path_to_target_list = "./target/todai_rikei.csv";
 
-auto_tweet($to, "./tweets/tweets_tsemiseisaku.json", $now_day, $now_hour, $now_minute);
+auto_tweet($to, "./tweets/tweets_tsemiseisaku.json", $now_hour, $now_minute, $now_day);
 #auto_follow2($to, $path_to_target_list, $now_hour, $now_minute, 5, 0, "./log_files/followed_list_tsemiseisaku.txt");
 ?>

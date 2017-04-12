@@ -12,5 +12,5 @@ $now_hour = date("H");
 $now_minute = date("i");
 $now_day_z = date("z");
 
-auto_tweet($to, "./tweets/tweets_seisaku_rikei.json", $now_day, $now_hour, $now_minute);
+auto_tweet($to, "./tweets/tweets_seisaku_rikei.json", $now_hour, $now_minute, $now_day + 1);
 ?>

@@ -9,12 +9,21 @@ function read_account_info($path_to_account_info){
   return array($consumer_key,$consumer_secret,$access_token,$access_token_secret);
 }
 
-function auto_tweet($to, $path_to_tweet_contents, $now_date, $now_hour, $now_minute){
+function auto_tweet($to, $path_to_tweet_contents, $now_hour, $now_minute, $now_date=False){
   $tweets_info = json_decode(file_get_contents($path_to_tweet_contents));
-  var_dump($now_date);
-  var_dump($now_date % 2);
+
+  #毎日ツイートする場合（旧来の方法）
+  if(now_date == False){
+    foreach($tweets_info as $tmp => $tweet_info){
+      if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute){
+        $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
+      }
+    }
+    return 0;
+  }
+
+  #2日周期でツイート内容を切り替える場合
   foreach($tweets_info as $tmp => $tweet_info){
-    var_dump($tweet_info->number);
     if($now_hour == $tweet_info->hour && $now_minute == $tweet_info->minute && $now_date % 2 == $tweet_info->number){
       $req = $to->OAuthRequest("https://api.twitter.com/1.1/statuses/update.json","POST",array("status"=>$tweet_info->content));
     }
